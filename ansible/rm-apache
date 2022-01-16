@@ -1,0 +1,5 @@
+- hosts: all
+  become: true
+  tasks:
+  - name: remove apache2
+    yum: name=apache2 state=absent

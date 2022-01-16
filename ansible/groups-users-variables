@@ -1,0 +1,30 @@
+- hosts: all
+  become: yes
+  vars:
+    users:
+    - username: Cavani
+    - username: Rashford
+    - username: Greenwood
+    - username: Pogba
+  tasks:
+  - name: add group for users
+    group:
+      name: united
+      state: present
+  - name: User added {{ item.username }}
+    user:
+      name: "{{ item.username }}"
+      create_home: yes
+      groups: united
+    with_items: "{{ users }}"
+  - name: install nginx
+    apt:
+      name: nginx
+      state: present
+    notify:
+    - start nginx
+  handlers:
+  - name: start nginx
+    service:
+      name: nginx
+      state: started
