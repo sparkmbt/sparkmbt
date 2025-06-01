@@ -9,7 +9,7 @@ metadata:
 spec:
   ports:
   - port: 6379 
-    targetPort: 80
+    targetPort: 6379
   selector:
     app: redis
     tier: backend
